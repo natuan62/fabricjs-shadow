@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas stroke</title>
+  </head>
+  <body>
+    <canvas id="c" width="300" height="200" style="border: 1px solid"></canvas>
+    <script>
+      const c = document.getElementById("c");
+      const ctx = c.getContext("2d");
+      ctx.moveTo(0, 0);
+      ctx.lineTo(200, 100);
+      let s = 100;
+      let i = 1;
+      var color = (16777215 / s.length) * i;
+      var r = (color >> 16) & 255;
+      var g = (color >> 8) & 255;
+      var b = color & 255;
+
+      var alpha = 0.5;
+
+      ctx.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+      ctx.stroke();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stroke</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.js"></script>
+  </head>
+  <body>
+    <p>Change opacity <input id="opacity" type="number" value="0.1"></p>
+    <button style="margin-bottom: 5px;"  onclick="render()">Reload</button>
+    <canvas
+      id="c"
+      width="800"
+      height="400"
+      style="border: 1px solid #000000"
+    ></canvas>
+    <script>
+      function render() {
+        console.log('render');
+        fabric.Object.prototype.set({
+          transparentCorners: false,
+          cornerColor: "rgba(102,153,255,0.5)",
+          cornerSize: 12,
+          padding: 5,
+        });
+
+        // initialize fabric canvas and assign to global windows object for debug
+        var canvas = (window._canvas = new fabric.Canvas("c"));
+
+        let opacity = document.getElementById('opacity').value;
+        console.log('opa', opacity);
+        var normalText = new fabric.Text("I'm a normal text", {
+          fontWeight: "normal",
+          left: 100,
+          top: 50,
+          fontWeight: 600,
+          color: "dark",
+          stroke: `rgba(72, 50, 168, ${opacity})`,
+          strokeWidth: 2,
+        });
+
+        canvas.add(normalText);
+
+        canvas.renderAll();
+      }
+
+      render();
+    </script>
+  </body>
+</html>
