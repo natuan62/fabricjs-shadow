@@ -7,8 +7,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.js"></script>
   </head>
   <body>
-    <p>Change opacity <input id="opacity" type="number" value="0.1"></p>
+    <p>Change opacity <input id="opacity" type="number" value="90"></p>
     <button style="margin-bottom: 5px;"  onclick="render()">Reload</button>
+    <img
+    style="width: 120px"
+    src="./images.jpg"
+    id="image"
+    alt=""
+  />
     <canvas
       id="c"
       width="800"
@@ -28,7 +34,7 @@
         // initialize fabric canvas and assign to global windows object for debug
         var canvas = (window._canvas = new fabric.Canvas("c"));
 
-        let opacity = document.getElementById('opacity').value;
+        let opacity = document.getElementById('opacity').value / 100;
         console.log('opa', opacity);
         var normalText = new fabric.Text("I'm a normal text", {
           fontWeight: "normal",
@@ -40,7 +46,17 @@
           strokeWidth: 2,
         });
 
-        canvas.add(normalText);
+        var imgElement = document.getElementById('image');
+        var imgInstance = new fabric.Image(imgElement, {
+          left: 40,
+          top: 120,
+          width: 120,
+          height: 120,
+          stroke: `rgba(72, 50, 168, ${opacity})`,
+          strokeWidth: 10,
+        });
+
+        canvas.add(normalText, imgInstance);
 
         canvas.renderAll();
       }

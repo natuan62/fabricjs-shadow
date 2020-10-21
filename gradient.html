@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gradient</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.6/fabric.min.js"></script>
+  </head>
+  <body>
+    <label for="">Degree <input type="number" id="degree" value="0" /></label>
+    <label for=""
+      >Opacity <input type="number" id="opacity" value="100"
+    /></label>
+    <button onclick="render()">Calc</button>
+    <canvas
+      id="c"
+      width="1000"
+      height="300"
+      style="margin-top: 10px; border: 1px solid #999"
+    ></canvas>
+    <script>
+      const render = () => {
+        // initialize fabric canvas and assign to global windows object for debug
+        const canvas = (window._canvas = new fabric.Canvas("c"));
+
+        let textInstance = new fabric.Text("text", {
+          top: 50,
+          left: 50,
+          padding: 0,
+          fontSize: 120,
+        });
+
+        const handleGradientChange = () => {
+          var angle = document.getElementById("degree").value;
+          var opacity = document.getElementById("opacity").value;
+
+          var anglePI = parseInt(180 - angle, 10) * (Math.PI / 180);
+
+          var angleCoords = {
+            x1: Math.round(50 + Math.sin(anglePI) * 50) / 100,
+            y1: Math.round(50 + Math.cos(anglePI) * 50) / 100,
+            x2: Math.round(50 + Math.sin(anglePI + Math.PI) * 50) / 100,
+            y2: Math.round(50 + Math.cos(anglePI + Math.PI) * 50) / 100,
+          };
+
+          let gradient = {
+            type: "linear",
+            gradientUnits: "percentage",
+            coords: {
+              x1: angleCoords.x1,
+              y1: angleCoords.y1,
+              x2: angleCoords.x2,
+              y2: angleCoords.y2,
+            },
+            colorStops: [
+              { offset: 0, color: "red", opacity: opacity / 100 },
+              { offset: 1, color: "gray", opacity: opacity / 100 },
+            ],
+          };
+
+          console.log("gradient.coords", gradient.coords);
+
+          return gradient;
+        };
+
+        textInstance.set("fill", new fabric.Gradient(handleGradientChange()));
+
+        canvas.add(textInstance);
+      };
+
+      render();
+    </script>
+  </body>
+</html>

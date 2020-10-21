@@ -12,6 +12,7 @@
       <p>Degree <input value="45" id="degree" type="text" /></p>
       <button onclick="render()">Calc</button>
     </div>
+    <img style="width: 120px" src="./images.jpg" id="image" alt="" />
     <canvas
       id="c"
       width="800"
@@ -31,7 +32,8 @@
 
         let x = distance * Math.cos(degreesToRadians(degree));
         let y = distance * Math.sin(degreesToRadians(degree));
-        return { x, y };
+        // return { x, y };
+        return { x: 0, y: 0 };
       }
 
       function render() {
@@ -74,6 +76,24 @@
         normalText.set(
           "shadow",
           new fabric.Shadow({
+            color: "#e71111",
+            blur: 20,
+            offsetX: calc().x,
+            offsetY: calc().y,
+          })
+        );
+
+        var imgElement = document.getElementById("image");
+        var imgInstance = new fabric.Image(imgElement, {
+          left: 40,
+          top: 120,
+          width: 120,
+          height: 120,
+        });
+
+        imgInstance.set(
+          "shadow",
+          new fabric.Shadow({
             color: "red",
             blur: 0,
             offsetX: calc().x,
@@ -81,10 +101,12 @@
           })
         );
 
-        canvas.add(rect, normalText);
+        canvas.add(rect, normalText, imgInstance);
 
         canvas.renderAll();
       }
+
+      render();
     </script>
   </body>
 </html>

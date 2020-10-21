@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas glow</title>
+  </head>
+  <body>
+    <canvas
+      id="c"
+      width="500"
+      height="300"
+      style="border: 1px solid #999"
+    ></canvas>
+    <script>
+      var c = document.getElementById("c");
+      var ctx = c.getContext("2d");
+
+      // clear background to black
+      //   ctx.fillStyle = "#000";
+      //   ctx.fillRect(0, 0, 500, 150);
+
+      // common font attributes
+      ctx.font = "70px Georgia";
+      ctx.fillStyle = "dark";
+
+      // apply multiple shadows
+
+      ctx.shadowColor = "blue";
+      
+      ctx.shadowBlur = 40;
+      ctx.fillText("glow", 50, 90);
+      ctx.shadowBlur = 40;
+
+    //   ctx.shadowBlur = 70;
+    //   ctx.fillText("glow", 50, 90);
+
+    //   ctx.shadowBlur = 80;
+    //   ctx.fillText("glow", 50, 90);
+
+    //   ctx.shadowBlur = 100;
+    //   ctx.fillText("glow", 50, 90);
+
+    //   ctx.shadowBlur = 150;
+    //   ctx.fillText("glow", 50, 90);
+    </script>
+  </body>
+</html>
