@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text drop shadow</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.js"></script>
+  </head>
+  <body>
+    <img style="width: 120px" src="./images.jpg" id="image" alt="" />
+    <div style="margin-left: 15px; margin-bottom: 10px">
+      <p>Distance [0, 200]</p>
+      <input type="range" min="0" max="200" value="0" id="myRange" />
+      <div class="result"></div>
+    </div>
+    <canvas
+      id="c"
+      width="800"
+      height="400"
+      style="border: 1px solid #000000"
+    ></canvas>
+    <script>
+      var distance = 0;
+      var canvas = (window._canvas = new fabric.Canvas("c"));
+
+      function change() {
+        const selectElement = document.getElementById("myRange");
+        selectElement.addEventListener("change", (event) => {
+          distance = event.target.value;
+          const result = document.querySelector(".result");
+          result.textContent = `Value ${distance}`;
+
+          render();
+        });
+      }
+      change();
+
+      function render() {
+        fabric.Object.prototype.set({
+          transparentCorners: false,
+          cornerColor: "rgba(102,153,255,0.5)",
+          cornerSize: 12,
+          padding: 5,
+        });
+
+        var normalText = new fabric.Text("Outer glow text distance", {
+          fontWeight: "normal",
+          left: 250,
+          top: 50,
+          shadow: {
+            color: "blue",
+            blur: 0,
+            offsetX: 0,
+            offsetY: 0,
+          },
+        });
+
+        const filters = new fabric.Image.filters.Blur({
+          blur: distance
+        });
+
+        normalText.cloneAsImage((clone) => {
+          console.log("cloneAsImage clone", clone);
+          clone.left = 250;
+          clone.top = 50;
+          
+          clone.filters.push(filters);
+          clone.applyFilters();
+          
+          canvas.add(normalText);
+          canvas.add(clone);
+
+          canvas.renderAll();
+        });
+      }
+
+      render();
+    </script>
+  </body>
+</html>

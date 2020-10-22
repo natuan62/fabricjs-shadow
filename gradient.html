@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gradient</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.6/fabric.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.js"></script> -->
   </head>
   <body>
     <label for="">Degree <input type="number" id="degree" value="0" /></label>
@@ -47,18 +48,19 @@
             type: "linear",
             gradientUnits: "percentage",
             coords: {
-              x1: angleCoords.x1,
-              y1: angleCoords.y1,
-              x2: angleCoords.x2,
-              y2: angleCoords.y2,
+              // x1: angleCoords.x1,
+              // y1: angleCoords.y1,
+              // x2: angleCoords.x2,
+              // y2: angleCoords.y2,
+              x1: 0.5, y1: 0, x2: 0.5, y2: 1
             },
             colorStops: [
-              { offset: 0, color: "red", opacity: opacity / 100 },
-              { offset: 1, color: "gray", opacity: opacity / 100 },
+              { offset: 0, color: "red", opacity: 100 / 100 },
+              { offset: 1, color: "blue", opacity: 100 / 100 },
             ],
           };
 
-          console.log("gradient.coords", gradient.coords);
+          console.log("gradient", gradient);
 
           return gradient;
         };

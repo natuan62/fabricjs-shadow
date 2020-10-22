@@ -26,23 +26,39 @@
 
       // apply multiple shadows
 
-      ctx.shadowColor = "blue";
+      // ctx.shadowColor = "blue";
+
+      // ctx.shadowBlur = 40;
+      // ctx.fillText("glow", 50, 90);
+      // ctx.shadowBlur = 40;
+
+      // ctx.shadowBlur = 70;
+      // ctx.fillText("glow", 50, 90);
+
+      //   ctx.shadowBlur = 80;
+      //   ctx.fillText("glow", 50, 90);
+
+      //   ctx.shadowBlur = 100;
+      //   ctx.fillText("glow", 50, 90);
+
+      //   ctx.shadowBlur = 150;
+      //   ctx.fillText("glow", 50, 90);
+
+      // Assuming your canvas element is ctx
+      ctx.shadowColor = "red"; // string
+
+      //Color of the shadow;  RGB, RGBA, HSL, HEX, and other inputs are valid.
+      ctx.shadowOffsetX = 0; // integer
       
-      ctx.shadowBlur = 40;
+      //Horizontal distance of the shadow, in relation to the text.
+      ctx.shadowOffsetY = 0; // integer
+      
+      //Vertical distance of the shadow, in relation to the text.
+      ctx.shadowBlur = 10; // integer
+      
+      //Blurring effect to the shadow, the larger the value, the greater the blur.
       ctx.fillText("glow", 50, 90);
-      ctx.shadowBlur = 40;
-
-    //   ctx.shadowBlur = 70;
-    //   ctx.fillText("glow", 50, 90);
-
-    //   ctx.shadowBlur = 80;
-    //   ctx.fillText("glow", 50, 90);
-
-    //   ctx.shadowBlur = 100;
-    //   ctx.fillText("glow", 50, 90);
-
-    //   ctx.shadowBlur = 150;
-    //   ctx.fillText("glow", 50, 90);
+      
     </script>
   </body>
 </html>
