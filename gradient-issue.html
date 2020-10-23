@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Gradient Issue</title>
+    <!-- Working -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.6.6/fabric.min.js"></script>
+
+    <!-- Not working -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.min.js"></script> -->
+  </head>
+  <body>
+    <canvas
+      id="c"
+      width="1000"
+      height="300"
+      style="margin-top: 10px; border: 1px solid #999"
+    ></canvas>
+    <script>
+      const canvas = (window._canvas = new fabric.Canvas("c"));
+
+      const textInstance = new fabric.Text("text", {
+        top: 50,
+        left: 50,
+        padding: 0,
+        fontSize: 120,
+      });
+
+      const handleGradientChange = () => {
+        var angle = 0;
+        var opacityGradient = 100;
+
+        var anglePI = parseInt(180 - angle, 10) * (Math.PI / 180);
+
+        var angleCoords = {
+          x1: Math.round(50 + Math.sin(anglePI) * 50) / 100,
+          y1: Math.round(50 + Math.cos(anglePI) * 50) / 100,
+          x2: Math.round(50 + Math.sin(anglePI + Math.PI) * 50) / 100,
+          y2: Math.round(50 + Math.cos(anglePI + Math.PI) * 50) / 100,
+        };
+
+        let gradient = {
+          type: "linear",
+          gradientUnits: "percentage",
+          coords: {
+            x1: angleCoords.x1,
+            y1: angleCoords.y1,
+            x2: angleCoords.x2,
+            y2: angleCoords.y2,
+          },
+          colorStops: [
+            { offset: 0, color: "red", opacity: opacityGradient / 100 },
+            { offset: 1, color: "blue", opacity: opacityGradient / 100 },
+          ],
+        };
+
+        return gradient;
+      };
+
+      // textInstance.set("fill", new fabric.Gradient(handleGradientChange()));
+      textInstance.fill = new fabric.Gradient(handleGradientChange());
+
+      canvas.add(textInstance);
+    </script>
+  </body>
+</html>

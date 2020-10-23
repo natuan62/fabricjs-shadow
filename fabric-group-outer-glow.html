@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text drop shadow</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.js"></script>
+  </head>
+  <body>
+    <img style="width: 120px" src="./images.jpg" id="image" alt="" />
+    <div style="margin-left: 15px; margin-bottom: 10px">
+      <p>Distance [0, 200]</p>
+      <input type="range" min="0" max="200" value="50" id="myRange" />
+      <div class="result"></div>
+    </div>
+    <canvas
+      id="c"
+      width="800"
+      height="400"
+      style="border: 1px solid #000000"
+    ></canvas>
+    <script>
+      var distance = 0;
+      var canvas = (window._canvas = new fabric.Canvas("c"));
+
+      function change() {
+        const selectElement = document.getElementById("myRange");
+        selectElement.addEventListener("change", (event) => {
+          distance = event.target.value;
+          const result = document.querySelector(".result");
+          result.textContent = `Value ${distance}`;
+
+          let s = 10;
+          let groups = [];
+          for (let index = 0; index < 5; index++) {
+            s += 10;
+            groups.push(
+              new fabric.Text("I'm a normal text", {
+                fontWeight: "normal",
+                left: 250,
+                top: 50,
+                shadow: {
+                  color: "blue",
+                  blur: s,
+                  offsetX: 0,
+                  offsetY: 0,
+                },
+              })
+            );
+          }
+
+          var group = new fabric.Group(groups);
+          canvas.add(group);
+          canvas.renderAll();
+        });
+      }
+
+      change();
+
+      function render() {
+        // Do some initializing stuff
+        fabric.Object.prototype.set({
+          transparentCorners: false,
+          cornerColor: "rgba(102,153,255,0.5)",
+          cornerSize: 12,
+          padding: 5,
+        });
+
+        // initialize fabric canvas and assign to global windows object for debug
+
+        var normalText = new fabric.Text("I'm a normal text", {
+          fontWeight: "normal",
+          left: 250,
+          top: 50,
+          shadow: {
+            color: "blue",
+            blur: 0,
+            offsetX: 0,
+            offsetY: 0,
+          },
+        });
+
+        // normalText.set(
+        //   "shadow",
+        //   new fabric.Shadow({
+        //     color: "blue",
+        //     blur: 10,
+        //     offsetX: 0,
+        //     offsetY: 0,
+        //   })
+        // );
+
+        // var normalText1 = new fabric.Text("I'm a normal text", {
+        //   fontWeight: "normal",
+        //   left: 250,
+        //   top: 50,
+        // });
+
+        // normalText1.set(
+        //   "shadow",
+        //   new fabric.Shadow({
+        //     color: "blue",
+        //     blur: 20,
+        //     offsetX: 0,
+        //     offsetY: 0,
+        //   })
+        // );
+
+        // var normalText2 = new fabric.Text("I'm a normal text", {
+        //   fontWeight: "normal",
+        //   left: 250,
+        //   top: 50,
+        // });
+
+        // normalText2.set(
+        //   "shadow",
+        //   new fabric.Shadow({
+        //     color: "blue",
+        //     blur: 30,
+        //     offsetX: 0,
+        //     offsetY: 0,
+        //   })
+        // );
+
+        // let groups = [];
+
+        // var group = new fabric.Group(
+        //   [normalText, normalText1, normalText2],
+        //   {}
+        // );
+
+        canvas.add(normalText);
+
+        canvas.renderAll();
+      }
+
+      render();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glow text</title>
+  </head>
+  <body>
+    <canvas
+      id="c"
+      width="500"
+      height="300"
+      style="border: 1px solid #999"
+    ></canvas>
+    <script>
+      var ctx = document.getElementById("c").getContext("2d");
+      ctx.font = "20pt Verdana";
+
+      ctx.shadowColor = "rgba(255, 0, 0, 1)";
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.shadowBlur = 10;
+      ctx.fillText("Text 1", 50, 50);
+
+      ctx.shadowBlur = 20;
+      ctx.strokeStyle = "rgba(255,0,0,0.5)";
+      ctx.lineWidth = 10;
+      ctx.fillStyle = "black";
+      ctx.strokeText("Text 2", 100, 100);
+      ctx.fillText("Text 2", 100, 100);
+
+      ctx.strokeStyle = "rgba(255,0,0,0.5)";
+      ctx.shadowBlur = 20;
+      ctx.lineWidth = 14;
+      ctx.strokeText("Text 3", 150, 200);
+      ctx.shadowBlur = 20;
+      ctx.fillText("Text 3", 150, 200);
+    </script>
+  </body>
+</html>

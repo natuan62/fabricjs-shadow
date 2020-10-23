@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Text drop shadow</title>
+    <title>Outer Glow Text</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.2.0/fabric.js"></script>
   </head>
   <body>
@@ -45,6 +45,7 @@
 
         var normalText = new fabric.Text("Outer glow text distance", {
           fontWeight: "normal",
+          fontSize: 42,
           left: 250,
           top: 50,
           shadow: {
@@ -54,20 +55,17 @@
             offsetY: 0,
           },
         });
-
-        const filters = new fabric.Image.filters.Blur({
-          blur: distance
-        });
+        
+        canvas.add(normalText);
 
         normalText.cloneAsImage((clone) => {
           console.log("cloneAsImage clone", clone);
-          clone.left = 250;
-          clone.top = 50;
-          
+          clone.left = 200;
+          clone.top = 20;
+
           clone.filters.push(filters);
           clone.applyFilters();
-          
-          canvas.add(normalText);
+
           canvas.add(clone);
 
           canvas.renderAll();
